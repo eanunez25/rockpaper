@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+
+<body>
+    <header>Rock Paper Scissors</header>
+
+    <div class=console> 
+        <div class="selection">
+            <div class="choose">Choose one:</div>
+            <img class="rock choices" src="img/rock.png" alt="rock">
+            <img class="paper choices" src="img/paper.png" alt="paper">
+            <img class="scissors choices" src="img/scissors.png" alt="scissors">
+        </div>
+
+        <div class="center">
+            <div class="upper">   
+                <div class="round">Select an Option</div>
+                <div class="score">Score: 0 - 0 - 0</div>
+                <div class="board">
+                    <img class="you" src="img/rock.png" alt="rock">
+                    <div class="versus">vs</div>
+                    <img class="computer" src="img/paper.png" alt="paper">
+                </div>
+                <div class="roundresults" style="font-size: 60px;"></div>
+            </div>
+            <ul class="statistics">Opponent has chosen:
+                <li class="rockOpp">Rock: --</li>
+                <li class="paperOpp" >Paper: --</li>
+                <li class="scissorsOpp">Scissors: --</li><br>
+                <li class="mwp">Your Win Percentage: --</li>
+            </ul>
+        </div>
+
+        <div class="right">
+            <div class="button">
+                <button class="reset">New Game</button><br><br>
+            </div>
+            <ol id="results">Results:
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        let playerScore = 0;
+        let compScore = 0;
+        let draw = 0;
+        let oppRock = 0;
+        let oppPaper = 0;
+        let oppScissors = 0;
+        let totalGames = playerScore + compScore + draw;
+        
+        function clicked(e) {
+            const playerSelection = changeMyImage(e);
+            const computerSelection = computerChooses();
+            playGame(playerSelection,computerSelection);
+        }
+
+        function playGame(playerSelection,computerSelection) {
+            let statement = '';
+            if (playerSelection == "rock" && computerSelection == "paper") {
+                statement =  "You lose!";
+            } else if (playerSelection == "paper" && computerSelection == "rock") {
+                statement =  "You win!";
+            } else if (playerSelection == "scissors" && computerSelection == "paper") {
+                statement =  "You win!";
+            } else if (playerSelection == "rock" && computerSelection == "scissors") {
+                statement =  "You win!";
+            } else if (playerSelection == "paper" && computerSelection == "scissors") {
+                statement =  "You lose!";
+            } else if (playerSelection == "scissors" && computerSelection == "rock") {
+                statement =  "You lose!";
+            } else if (playerSelection == computerSelection) {
+                statement =  `You drew!`;
+            } else {
+                statement =  `Error. Computer chose ${computerSelection}`;
+            }
+
+            const resultStatement = document.querySelector('.roundresults')
+            resultStatement.innerHTML = statement;
+
+            if (statement == 'You win!') {
+                playerScore += 1;
+            } else if (statement == 'You lose!') {
+                compScore += 1;
+            } else {
+                draw += 1;
+            }
+
+            const scoreboard = document.querySelector('.score');
+            scoreboard.innerHTML = `Score: ${playerScore} - ${compScore} - ${draw}`
+
+            totalGames = playerScore + compScore + draw;
+            const mwp = document.querySelector('.mwp')
+            let winPercentage = (playerScore / totalGames) * 100;
+            winPercentage = winPercentage.toFixed(1);
+            mwp.innerHTML = `Your Win Percentage: ${winPercentage}%`;
+
+            const whatRound = document.querySelector('.round')
+            whatRound.innerHTML = `Round ${totalGames} of ${roundNumber}`
+
+            if (totalGames == roundNumber) {
+                if (playerScore > compScore) {
+                    alert(`You won the game! ${playerScore}-${compScore}-${draw}`);
+                } else if (playerScore < compScore) {
+                    alert(`You lost the game! ${playerScore}-${compScore}-${draw}`);
+                } else {
+                    alert(`You drew the game! ${playerScore}-${compScore}-${draw}`);
+                }
+            }
+
+            let resultsRight = '';
+            if (playerSelection == "rock" && computerSelection == "paper") {
+                resultsRight = "You lost! Paper beats rock.";
+                console.log(resultsRight)
+                let parent = document.getElementById('results')
+                let newNode = document.createElement('li');
+                newNode.textContent = resultsRight;
+                parent.appendChild(newNode)
+            } else if (playerSelection == "paper" && computerSelection == "rock") {
+                resultsRight = "You won! Paper beats rock.";
+                let parent = document.getElementById('results')
+                let newNode = document.createElement('li');
+                newNode.textContent = resultsRight;
+                parent.appendChild(newNode)
+            } else if (playerSelection == "scissors" && computerSelection == "paper") {
+                resultsRight = "You won! Scissors beats rock.";
+                let parent = document.getElementById('results')
+                let newNode = document.createElement('li');
+                newNode.textContent = resultsRight;
+                parent.appendChild(newNode)
+            } else if (playerSelection == "rock" && computerSelection == "scissors") {
+                resultsRight = "You won! Rock beats scissors.";
+                let parent = document.getElementById('results')
+                let newNode = document.createElement('li');
+                newNode.textContent = resultsRight;
+                parent.appendChild(newNode)
+            } else if (playerSelection == "paper" && computerSelection == "scissors") {
+                resultsRight = "You lost! Scissors beats rock.";
+                let parent = document.getElementById('results')
+                let newNode = document.createElement('li');
+                newNode.textContent = resultsRight;
+                parent.appendChild(newNode)
+            } else if (playerSelection == "scissors" && computerSelection == "rock") {
+                resultsRight = "You lost! Rock beats scissors.";
+                let parent = document.getElementById('results')
+                let newNode = document.createElement('li');
+                newNode.textContent = resultsRight;
+                parent.appendChild(newNode)
+            } else if (playerSelection == computerSelection) {
+                resultsRight = `You drew! You both picked ${playerSelection}.`;
+                let parent = document.getElementById('results')
+                let newNode = document.createElement('li');
+                newNode.textContent = resultsRight;
+                parent.appendChild(newNode)
+            } else {
+                resultsRight = `Error. Computer chose ${computerSelection}` ;
+            }
+        }
+
+        function computerChooses() {
+            let gameOptions = ["Rock", "Paper", "Scissors"];
+            let selection = Math.floor(Math.random()*gameOptions.length);
+            selection = gameOptions[selection].toLowerCase();
+
+            const chosenImgComp = document.querySelector('.computer')
+            if (selection == 'rock') {
+                chosenImgComp.src = "img/rock.png";
+            } else if ( selection == 'paper') {
+                chosenImgComp.src = "img/paper.png";
+            } else {
+                chosenImgComp.src = "img/scissors.png";
+            }
+
+            if (selection == 'rock') {
+                oppRock += 1;
+            } else if(selection == 'paper') {
+                oppPaper += 1;
+            } else {
+                oppScissors += 1;
+            }
+            totalGames = oppRock + oppPaper + oppScissors;
+            const rockStat = document.querySelector('.rockOpp')
+            let rockUsage = (oppRock / totalGames) * 100;
+            rockUsage = rockUsage.toFixed(1);
+            rockStat.innerHTML = `Rock: ${rockUsage}%`;
+            const paperStat = document.querySelector('.paperOpp')
+            let paperUsage = (oppPaper / totalGames) * 100;
+            paperUsage = paperUsage.toFixed(1);
+            paperStat.innerHTML = `Paper: ${paperUsage}%`;
+            const scissorsStat = document.querySelector('.scissorsOpp')
+            let scissorsUsage = (oppScissors/ totalGames) * 100;
+            scissorsUsage = scissorsUsage.toFixed(1);
+            scissorsStat.innerHTML = `Scissors: ${scissorsUsage}%`;
+
+            return selection;
+        }
+
+        function changeMyImage(e) {
+            const chosen = e.target.src;
+            const chosenImg = document.querySelector('.you')
+            chosenImg.src = chosen;
+            const playerChoice = e.target.alt;
+
+            return playerChoice;
+        }
+
+
+
+        const roundNumber = prompt('How many rounds?');
+        const selections = document.querySelectorAll('.choices');
+        selections.forEach(img => img.addEventListener('click', clicked));
+        const newGame = document.querySelector('.reset')
+        newGame.addEventListener('click', () => {
+            window.location.reload();
+        });
+
+    </script>
+    </body>
+</html>

@@ -1,0 +1,100 @@
+* {
+    color: white;
+}
+header{
+    color: white;
+    width: 850px;
+    text-align: center;
+    margin: 20px auto;
+    font-size: 100px;
+    position: relative;
+    height: 15vh;
+}
+
+header:hover {
+    color: yellow;
+    transform: scale(1.05);
+}
+
+html {
+    background-color: black;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+}
+
+.selection {
+    float: left;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 80vh;
+}
+
+div.center {
+    float: left;
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    margin-top: 10px;
+}
+
+.right {
+    float: left;
+    width: 30%;
+    
+}
+
+div.upper {
+    font-size: 40px;
+}
+
+ul.statistics {
+    margin: 60px auto;
+    list-style: none;
+    font-size: 20px
+}
+
+div.board {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 50px auto;
+}
+div.board img {
+    height: 200px;
+    width: 200px;
+}
+
+div.selection img:hover {
+    transform: scale(1.1);
+    border: 10px solid white;
+}
+
+div.button {
+    display: flex;
+    justify-content: center;
+    
+}
+
+button {
+    background-color: white;
+    color: black;
+    width: 200px;
+    height: 30px;
+    font-size: 20px;
+    transition: .5s;
+    margin-bottom: 30px;
+}
+
+button:hover {
+    background-color: yellow;
+    border-radius: 4px;
+}

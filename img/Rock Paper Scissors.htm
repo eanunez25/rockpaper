@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)file:///Users/elvin/javascript-codes/rockPaperScissors/images/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="./Rock Paper Scissors_files/style.css">
+</head>
+
+
+<body>
+    <header>Rock Paper Scissors</header>
+
+    <div class="console"> 
+        <div class="selection">
+            <div class="choose">Choose one:</div>
+            <img class="rock" src="./Rock Paper Scissors_files/rock.png" alt="rock">
+            <img class="paper" src="./Rock Paper Scissors_files/paper.png" alt="paper">
+            <img class="scissors" src="./Rock Paper Scissors_files/scissors.png" alt="scissors">
+        </div>
+
+        <div class="center">
+            <div class="upper">
+                <div class="round">Round 1 of 7</div>
+                <div class="score">Score: 0 - 0 - 0</div>
+                <div class="board">
+                    <img class="you" src="./Rock Paper Scissors_files/rock.png" alt="rock">
+                    <div class="versus">vs</div>
+                    <img src="./Rock Paper Scissors_files/paper.png" alt="paper">
+                </div>
+                <div class="roundresults" style="font-size: 60px;">You Won!</div>
+            </div>
+            <ul class="statistics">Opponent has chosen:
+                <li>Rock: 33%</li>
+                <li>Paper: 33%</li>
+                <li>Scissors: 34%</li><br>
+                <li>Your Win Percentage: 46.2%</li>
+            </ul>
+        </div>
+
+        <div class="right">
+            <div class="button">
+                <button class="reset">New Game</button><br><br>
+            </div>
+            <ol class="results">Results
+                <li>You won round 1 with paper.</li>
+                <li>You lost round 2 with rock.</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        let playerChoices = document.querySelectorAll('img');
+        playerChoices = Array.from(playerChoices);
+        playerChoices = playerChoices.slice(0,3);
+        console.log(playerChoices);
+        playerChoices.forEach((img) => {
+            img.addEventListener('click', (e) => {
+                console.log(e);
+        });
+    </script>
+
+</body></html>
